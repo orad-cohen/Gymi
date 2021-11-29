@@ -1,17 +1,65 @@
 package com.project.gymi;
 
+import androidx.annotation.NonNull;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class User {
+    private static User instance=null;
 
     public String username;
-    public String email;
     public String role;
-    public User() {
-        // Default constructor required for calls to DataSnapshot.getValue(User.class)
+    private static FirebaseAuth mAuth;
+    private User() {
+        final FirebaseDatabase Database = FirebaseDatabase.getInstance();
+        String Uid = util.getUID();
+        DatabaseReference red = Database.getReference("users/"+Uid+"/Name");
+        red.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                username = snapshot.getValue(String.class);
+                System.out.println("inner "+ username);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        DatabaseReference rl = Database.getReference("users/"+Uid+"/Role");
+        rl.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                role = snapshot.getValue(String.class);
+                System.out.println("inner "+ username);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+
+
     }
 
-    public User(String username, String email) {
-        this.username = username;
-        this.email = email;
+    public static User getInstance()
+    {
+        if (instance == null)
+            instance = new User();
+
+        return instance;
     }
+
+
 
 }

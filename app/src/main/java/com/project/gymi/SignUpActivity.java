@@ -31,7 +31,7 @@ import android.view.View;
 import android.widget.EditText;
 public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-        private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +72,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     mDatabase.child("users").child(user.getUid()).child("Name").setValue(name);
                                     mDatabase.child("users").child(user.getUid()).child("Role").setValue(role);
+                                    User.getInstance();
                                     Intent intent = new Intent(SignUpActivity.this,TraineeHomeActivity.class);
                                     startActivity(intent);
 

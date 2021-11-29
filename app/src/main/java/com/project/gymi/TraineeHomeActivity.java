@@ -1,10 +1,12 @@
 package com.project.gymi;
 
+import static com.project.gymi.util.getUID;
+
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Toast;
-
+import com.project.gymi.util;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,27 +26,17 @@ public class TraineeHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.trainee_home);
+
     }
 
     public void getName(View view) {
-        final FirebaseDatabase Database = FirebaseDatabase.getInstance();
-        String Uid = mAuth.getCurrentUser().getUid();
-        DatabaseReference red = Database.getReference("users/"+Uid+"/Name");
-        red.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String sa = snapshot.getValue(String.class);
-                System.out.println(sa);
-                Toast.makeText(TraineeHomeActivity.this, "your name is "+ snapshot.getValue(String.class), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        Toast.makeText(this, "Your name is "+ User.getInstance().username, Toast.LENGTH_SHORT).show();
 
 
 
+    }
+
+    public void getRole(View view) {
+        Toast.makeText(this, "Your role is "+ User.getInstance().role, Toast.LENGTH_SHORT).show();
     }
 }
