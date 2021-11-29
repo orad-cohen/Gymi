@@ -40,7 +40,31 @@ public class LoginActivity extends AppCompatActivity {
     public void signUp(View view) {
         Intent intent = new Intent(this,SignUpActivity.class);
         startActivity(intent);
+    }
+    public void login(View view){
+        EditText Email = findViewById(R.id.eEmail);
+        EditText Password = findViewById(R.id.ePassword);
+        String email = Email.getText().toString();
+        String password = Password.getText().toString();
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Intent intent = new Intent(LoginActivity.this,TraineeHomeActivity.class);
+                            startActivity(intent);
 
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
 
+                        }
+                    }
+                });
     }
 }

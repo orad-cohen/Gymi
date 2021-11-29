@@ -31,7 +31,7 @@ import android.view.View;
 import android.widget.EditText;
 public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
+        private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,17 +67,18 @@ public class SignUpActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-
                                     mDatabase = FirebaseDatabase.getInstance().getReference();
                                     Log.d(TAG, "createUserWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    mDatabase.child("users").child(user.getUid()).child(name).setValue(role);
-                                    Toast.makeText(SignUpActivity.this, "Authentication Succeed.",
-                                            Toast.LENGTH_SHORT).show();
+                                    mDatabase.child("users").child(user.getUid()).child("Name").setValue(name);
+                                    mDatabase.child("users").child(user.getUid()).child("Role").setValue(role);
+                                    Intent intent = new Intent(SignUpActivity.this,TraineeHomeActivity.class);
+                                    startActivity(intent);
+
                                 } else {
                                     // If sign in fails, display a message to the user.
 
-                                    Toast.makeText(SignUpActivity.this, "Authentication failed.",
+                                    Toast.makeText(SignUpActivity.this, "Signup Failed.",
                                             Toast.LENGTH_SHORT).show();
 
                                 }

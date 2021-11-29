@@ -29,7 +29,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.556" />
+        app:layout_constraintVertical_bias="0.154" />
 
     <EditText
         android:id="@+id/ePassword"
@@ -67,6 +67,7 @@
         app:layout_constraintEnd_toEndOf="@+id/ePassword"
         app:layout_constraintStart_toStartOf="@+id/ePassword"
         app:layout_constraintTop_toBottomOf="@+id/ePassword"
-        app:layout_constraintVertical_bias="0.157" />
+        app:layout_constraintVertical_bias="0.157"
+        android:onClick="login"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
