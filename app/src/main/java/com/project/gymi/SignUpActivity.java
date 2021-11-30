@@ -72,9 +72,17 @@ public class SignUpActivity extends AppCompatActivity {
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     mDatabase.child("users").child(user.getUid()).child("Name").setValue(name);
                                     mDatabase.child("users").child(user.getUid()).child("Role").setValue(role);
+
                                     User.getInstance();
-                                    Intent intent = new Intent(SignUpActivity.this,TraineeHomeActivity.class);
-                                    startActivity(intent);
+                                    if(User.getInstance().role=="Trainer"){
+                                        Intent intent = new Intent(SignUpActivity.this,TrainerHome.class);
+                                        startActivity(intent);
+                                    }
+                                    else{
+                                        Intent intent = new Intent(SignUpActivity.this,TraineeHomeActivity.class);
+                                        startActivity(intent);
+                                    }
+
 
                                 } else {
                                     // If sign in fails, display a message to the user.

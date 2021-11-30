@@ -2,6 +2,7 @@ package com.project.gymi;
 
 import static com.project.gymi.util.getUID;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
@@ -38,5 +39,25 @@ public class TraineeHomeActivity extends AppCompatActivity {
 
     public void getRole(View view) {
         Toast.makeText(this, "Your role is "+ User.getInstance().role, Toast.LENGTH_SHORT).show();
+    }
+
+    public void newTrainer(View view) {
+        Intent intent = new Intent(this,FindTrainerActivity.class);
+        startActivity(intent);
+    }
+
+    public void chatTrainer(View view) {
+        Intent intent = new Intent(this,ChatActivity.class);
+        startActivity(intent);
+    }
+
+    public void startWorkout(View view) {
+        Intent intent = new Intent(this,WorkoutReport.class);
+        startActivity(intent);
+    }
+
+    public void workoutReports(View view) {
+        Intent intent = new Intent(this,ReportsActivity.class);
+        startActivity(intent);
     }
 }

@@ -24,10 +24,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-
+    FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+    DatabaseReference ref = firebaseDatabase.getReference("users/");
 
           @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +61,29 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             User.getInstance();
-                            Intent intent = new Intent(LoginActivity.this,TraineeHomeActivity.class);
-                            startActivity(intent);
+                            ref.child(mAuth.getUid()).child("Role").addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                    if(snapshot.getValue(String.class).equals("Trainer")){
+                                        Intent intent = new Intent(LoginActivity.this,TrainerHome.class);
+                                        startActivity(intent);
+                                    }
+                                    else{
+
+                                        Intent intent = new Intent(LoginActivity.this,TraineeHomeActivity.class);
+                                        startActivity(intent);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+
+
+
 
                         } else {
                             // If sign in fails, display a message to the user.

@@ -20,6 +20,12 @@
         </activity>
         <activity android:name=".SignUpActivity"></activity>
         <activity android:name=".TraineeHomeActivity"></activity>
+        <activity android:name=".TrainerHome"></activity>
+        <activity android:name=".ReportsActivity"></activity>
+        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".WorkoutReport"></activity>
+        <activity android:name=".FindTrainerActivity"></activity>
+
     </application>
 
 </manifest>

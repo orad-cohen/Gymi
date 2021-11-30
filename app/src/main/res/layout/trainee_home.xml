@@ -31,5 +31,34 @@
             android:layout_weight="1"
             android:text="What's my Role?"
             android:onClick="getRole"/>
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/newTrainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New Trainer"
+        android:onClick="newTrainer"/>
+
+    <Button
+        android:id="@+id/chatTrainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Chat with my Trainer"
+        android:onClick="chatTrainer"/>
+
+    <Button
+        android:id="@+id/startWorkout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Start workout"
+        android:onClick="startWorkout"/>
+
+    <Button
+        android:id="@+id/workoutReports"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Previous workouts"
+        android:onClick="workoutReports"/>
 </LinearLayout>
