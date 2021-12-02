@@ -22,16 +22,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
 public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
+    FirebaseAuth ref=FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,11 +63,10 @@ public class SignUpActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     mDatabase = FirebaseDatabase.getInstance().getReference();
                                     Log.d(TAG, "createUserWithEmail:success");
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    mDatabase.child("users").child(user.getUid()).child("Name").setValue(name);
-                                    mDatabase.child("users").child(user.getUid()).child("Role").setValue(role);
-                                    User.getInstance();
-                                    Intent intent = new Intent(SignUpActivity.this,TraineeHomeActivity.class);
+                                    User newUser=new User(name,role);
+                                    DatabaseReference usersReference= FirebaseDatabase.getInstance().getReference("users");
+                                    usersReference.child(ref.getCurrentUser().getUid()).setValue(newUser);
+                                    Intent intent = new Intent(SignUpActivity.this, TrainerHomeActivity.class);
                                     startActivity(intent);
 
                                 } else {

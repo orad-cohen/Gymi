@@ -44,11 +44,17 @@ public class User {
 
             }
         });
+    }
 
+    public User (User user){
+        this.username= user.username;
+        this.role = user.role;
 
+    }
 
-
-
+     public User (String name,String role){
+        this.username= name;
+        this.role = role;
 
     }
 
