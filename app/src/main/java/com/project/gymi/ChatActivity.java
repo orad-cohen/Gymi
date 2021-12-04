@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,7 +37,7 @@ import java.util.Map;
 
 public class ChatActivity extends AppCompatActivity {
         private ScrollView scrollWindow;
-        private Button send;
+        private Button send,sendRequest;
         private EditText txt;
         private String Trainer,Trainee;
         private FirebaseDatabase chatData = FirebaseDatabase.getInstance();
@@ -49,7 +50,14 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //attach views to variables
         setContentView(R.layout.chat_layout);
+        sendRequest = new Button(getApplicationContext());
+        sendRequest.setText("Send the trainer a request");
         scrollWindow = findViewById(R.id.window);
+        LinearLayout chatLayout = findViewById(R.id.chatLayout);
+
+        sendRequest.setBackgroundColor(getResources().getColor(R.color.dark_orange));
+        chatLayout.addView(sendRequest);
+
         send = findViewById(R.id.send);
         txt = findViewById(R.id.txtsend);
         Trainee = getIntent().getExtras().get("Trainee").toString();
@@ -141,7 +149,9 @@ public class ChatActivity extends AppCompatActivity {
                         name.setGravity(Gravity.RIGHT);
                         messageContent.setGravity(Gravity.RIGHT);
                         messageContent.setText(chat_msg);
-                        messageContent.setBackground(getDrawable(R.color.green));
+                        messageContent.setPadding(0,0,25,0);
+                        name.setPadding(0,0,10,0);
+                        //messageContent.setBackground(getDrawable(R.color.purple_200));
 
                         //code for using vector as message background.
                         /*
@@ -161,7 +171,9 @@ public class ChatActivity extends AppCompatActivity {
                         name.setGravity(Gravity.LEFT);
                         messageContent.setGravity(Gravity.LEFT);
                         messageContent.setText(chat_msg);
-                        messageContent.setBackground(getDrawable(R.color.lightBlue));
+                        name.setPadding(10,0,0,0);
+                        messageContent.setPadding(25,0,0,0);
+                        //messageContent.setBackground(getDrawable(R.color.lightBlue));
 
                         //code for using vector as message background.
                         /*
@@ -181,7 +193,7 @@ public class ChatActivity extends AppCompatActivity {
                     //messageContent.setBackground(img.getDrawable());
 
                     name.setTextSize(24);
-
+                    name.setTypeface(name.getTypeface(), Typeface.BOLD);
                     messageWindow.addView(name);
                     da.addView(messageContent);
                     messageWindow.addView(da);
