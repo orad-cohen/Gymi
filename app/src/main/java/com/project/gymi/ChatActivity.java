@@ -120,6 +120,9 @@ public class ChatActivity extends AppCompatActivity {
                 Iterator i = dataSnapshot.getChildren().iterator();
 
                 while (i.hasNext()){
+                    LinearLayout da = new LinearLayout(getApplicationContext());
+                    da.setOrientation(LinearLayout.HORIZONTAL);
+
                     TextView messageContent = new TextView(getApplicationContext());
                     TextView name = new TextView(getApplicationContext());
 
@@ -133,6 +136,8 @@ public class ChatActivity extends AppCompatActivity {
                     //Bitmap resizedBitmap;
                     name.setText(chat_user_name);
                     if(myRole.equals(msg_role)){
+
+                        da.setGravity(Gravity.RIGHT);
                         name.setGravity(Gravity.RIGHT);
                         messageContent.setGravity(Gravity.RIGHT);
                         messageContent.setText(chat_msg);
@@ -152,6 +157,7 @@ public class ChatActivity extends AppCompatActivity {
 
                     }
                     else{
+                        da.setGravity(Gravity.LEFT);
                         name.setGravity(Gravity.LEFT);
                         messageContent.setGravity(Gravity.LEFT);
                         messageContent.setText(chat_msg);
@@ -177,7 +183,8 @@ public class ChatActivity extends AppCompatActivity {
                     name.setTextSize(24);
 
                     messageWindow.addView(name);
-                    messageWindow.addView(messageContent);
+                    da.addView(messageContent);
+                    messageWindow.addView(da);
                     //auto scroll down when messages appear;
                     messageWindow.post(() -> {
                         scrollWindow = findViewById(R.id.window);
