@@ -48,6 +48,9 @@ public class TraineeHomeActivity extends AppCompatActivity {
 
     public void chatTrainer(View view) {
         Intent intent = new Intent(this,ChatActivity.class);
+        intent.putExtra("Trainee", mAuth.getUid());
+        intent.putExtra("Role","Trainee");
+        intent.putExtra("Trainer","CkorN6Rq6KZtdiIAhMvoh6DgmPp1");
         startActivity(intent);
     }
 

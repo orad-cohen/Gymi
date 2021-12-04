@@ -1,64 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="40dp"
+   >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:layout_weight="1"
+        >
+
+
+        <Button
+            android:id="@+id/startWorkout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="startWorkout"
+            android:text="Start workout"
+            android:layout_weight="1"
+            />
+
+        <Button
+            android:id="@+id/workoutReports"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="workoutReports"
+            android:text="Previous workouts"
+            android:layout_weight="1"/>
+    </TableRow>
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:layout_weight="1"
+        >
+        <Button
+            android:id="@+id/chatTrainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="chatTrainer"
+            android:text="Chat Trainer" />
+
+        <Button
+            android:id="@+id/newTrainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="newTrainer"
+            android:text="New Trainer" />
+</TableRow>
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:layout_weight="1"
+        >
+        <Button
+            android:id="@+id/bt1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="getRole"
+            android:text="What's my Role?" />
 
         <Button
             android:id="@+id/button11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="What's my Name"
-            android:onClick="getName"/>
+            android:onClick="getName"
+            android:text="What's my Name" />
+    </TableRow>
 
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/bt1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="What's my Role?"
-            android:onClick="getRole"/>
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/newTrainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="New Trainer"
-        android:onClick="newTrainer"/>
-
-    <Button
-        android:id="@+id/chatTrainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Chat with my Trainer"
-        android:onClick="chatTrainer"/>
-
-    <Button
-        android:id="@+id/startWorkout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Start workout"
-        android:onClick="startWorkout"/>
-
-    <Button
-        android:id="@+id/workoutReports"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Previous workouts"
-        android:onClick="workoutReports"/>
-</LinearLayout>
+</TableLayout>

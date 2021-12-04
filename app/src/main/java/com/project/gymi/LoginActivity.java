@@ -9,33 +9,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
+import com.google.firebase.database.*;
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-    DatabaseReference ref = firebaseDatabase.getReference("users/");
+    private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+    private DatabaseReference ref = firebaseDatabase.getReference("users/");
 
-          @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
@@ -48,50 +35,55 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void login(View view){
-        EditText Email = findViewById(R.id.eEmail);
-        EditText Password = findViewById(R.id.ePassword);
-        String email = Email.getText().toString();
-        String password = Password.getText().toString();
+        //get Email and Password from view
+        String email = ((EditText) findViewById(R.id.eEmail)).getText().toString();
+        String password = ((EditText) findViewById(R.id.ePassword)).getText().toString();
+        //avoid sending empty data to FireBase
+        if(email.equals("")||password.equals("")){
+            Toast.makeText(this, "Missing credentials", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //Logging in to FireBase
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            User.getInstance();
-                            ref.child(mAuth.getUid()).child("Role").addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "signInWithEmail:success");
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        User.getInstance(); //Update singleton user so it would be ready for the app;
 
-                                    if(snapshot.getValue(String.class).equals("Trainer")){
-                                        Intent intent = new Intent(LoginActivity.this,TrainerHome.class);
-                                        startActivity(intent);
-                                    }
-                                    else{
+                        ref.child(user.getUid()).child("Role").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                                        Intent intent = new Intent(LoginActivity.this,TraineeHomeActivity.class);
-                                        startActivity(intent);
-                                    }
+                                if(snapshot.getValue(String.class).equals("Trainer")){
+                                    Intent intent = new Intent(LoginActivity.this,ChatActivity.class);
+
+                                    //todo once the database structure for Trainer Trainee connection is ready update it accordingly
+                                    intent.putExtra("Trainer",user.getUid());
+                                    intent.putExtra("Trainee","AW88ReWhZEavTl4diQFzympWNEO2");
+                                    intent.putExtra("Role","Trainer");
+                                    startActivity(intent);
                                 }
+                                else{
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-
+                                    Intent intent = new Intent(LoginActivity.this,TraineeHomeActivity.class);
+                                    startActivity(intent);
                                 }
-                            });
+                            }
 
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                    Log.d(TAG,error.toString());
+                            }
+                        });
 
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "signInWithEmail:failure", task.getException());
+                        Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
 
-
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-
-                        }
                     }
                 });
     }
