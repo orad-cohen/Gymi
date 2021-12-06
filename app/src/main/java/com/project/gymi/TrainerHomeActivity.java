@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,8 @@ public class TrainerHomeActivity extends AppCompatActivity {
 
          TextView tvName = (TextView) findViewById(R.id.tvName);
          TextView tvRole = (TextView) findViewById(R.id.tvRole);
+         Button btnMeals= (Button) findViewById(R.id.btnMeals);
+         btnMeals.setText("Meals");
 
         String uid=FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();
@@ -49,5 +52,14 @@ public class TrainerHomeActivity extends AppCompatActivity {
 
             }
         });
+
+        btnMeals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(TrainerHomeActivity.this, mealsActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
