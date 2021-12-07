@@ -37,12 +37,13 @@ public class LoginActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-        if(user!=null){
+        setContentView(R.layout.login_layout);
+        /*if(user!=null){
             signIn();
         }
         else{
-            setContentView(R.layout.login_layout);
-        }
+
+        }*/
 
 
     }
@@ -120,6 +121,7 @@ public class LoginActivity extends AppCompatActivity{
     }
     protected void updateTimestamp() {
         Date time = new Date();
+        ref.child(user.getUid()).child("Timestamp").setValue(time.getTime());
     }
     protected void updateLocation(){
         LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
