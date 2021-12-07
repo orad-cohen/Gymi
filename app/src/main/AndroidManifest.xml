@@ -26,6 +26,8 @@
         <activity android:name=".WorkoutReport"></activity>
         <activity android:name=".FindTrainerActivity"></activity>
         <activity android:name=".Workout"></activity>
+        <activity android:name=".NewWorkout"></activity>
+
 
 
     </application>
