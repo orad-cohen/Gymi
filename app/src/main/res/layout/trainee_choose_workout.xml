@@ -19,7 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/my_workout"
         android:layout_centerInParent="true"
-
         android:text="upload workout" />
 
     <Button
@@ -28,4 +27,5 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="my workout" />
+
 </RelativeLayout>
