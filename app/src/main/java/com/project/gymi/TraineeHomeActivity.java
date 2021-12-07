@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import com.project.gymi.util;
 import androidx.annotation.NonNull;
@@ -22,13 +23,34 @@ import com.google.firebase.database.ValueEventListener;
 public class TraineeHomeActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
+    private Button button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.trainee_home);
+        //##############################################//
+
+        button = findViewById(R.id.chooseWorkout);
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                chooseWorkout();
+            }
+        });
+
 
     }
+    public void chooseWorkout() {
+        Intent intent = new Intent(this, Workout.class);
+        startActivity(intent);
+    }
+
+
+
+
+
 
     public void getName(View view) {
         Toast.makeText(this, "Your name is "+ User.getInstance().username, Toast.LENGTH_SHORT).show();
@@ -43,6 +65,7 @@ public class TraineeHomeActivity extends AppCompatActivity {
 
     public void newTrainer(View view) {
         Intent intent = new Intent(this,FindTrainerActivity.class);
+
         startActivity(intent);
     }
 
@@ -54,13 +77,16 @@ public class TraineeHomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void startWorkout(View view) {
-        Intent intent = new Intent(this,WorkoutReport.class);
-        startActivity(intent);
-    }
+    //public void startWorkout(View view) {
+    //    Intent intent = new Intent(this,WorkoutReport.class);
+    //    startActivity(intent);
+    //}
 
     public void workoutReports(View view) {
         Intent intent = new Intent(this,ReportsActivity.class);
         startActivity(intent);
     }
+
+
+
 }

@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +25,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,7 +45,7 @@ public class ChatActivity extends AppCompatActivity {
         private EditText txt;
         private String Trainer,Trainee;
         private FirebaseDatabase chatData = FirebaseDatabase.getInstance();
-        private DatabaseReference chatRef;
+        private DatabaseReference chatRef,pairRef;
         private String myRole;
         private String key;
 
@@ -52,50 +56,70 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.chat_layout);
         sendRequest = new Button(getApplicationContext());
         sendRequest.setText("Send the trainer a request");
+        pairRef = chatData.getReference().child("Trainers");
+
         scrollWindow = findViewById(R.id.window);
         LinearLayout chatLayout = findViewById(R.id.chatLayout);
-
-        sendRequest.setBackgroundColor(getResources().getColor(R.color.dark_orange));
-        chatLayout.addView(sendRequest);
 
         send = findViewById(R.id.send);
         txt = findViewById(R.id.txtsend);
         Trainee = getIntent().getExtras().get("Trainee").toString();
         Trainer = getIntent().getExtras().get("Trainer").toString();
         myRole = getIntent().getExtras().get("Role").toString();
+        if(myRole.equals("Trainee")){
+            pairRef.child(Trainer).child(Trainee).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(!snapshot.exists()){
+                        sendRequest.setBackgroundColor(getResources().getColor(R.color.dark_orange));
+                        chatLayout.addView(sendRequest);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {}});
+
+        }
+
+        sendRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                FirebaseUser user = auth.getCurrentUser();
+                pairRef.child("CkorN6Rq6KZtdiIAhMvoh6DgmPp1").child(user.getUid()).setValue("1");
+                Toast.makeText(ChatActivity.this, "request sent", Toast.LENGTH_SHORT).show();
+            }
+        });
         //use Trainer Trainee to set up a chatroom
         String chatRoom = Trainer+" "+Trainee;
         chatRef = chatData.getReference().child("chat").child(chatRoom).getRef();
         //set up send listener
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(txt.getText().toString().equals("")){//don't send empty messages
-                    return;
-                }
-
-                Map<String,Object> chatRoom = new HashMap<String,Object>();
-
-                key = chatRef.push().getKey();
-                chatRef.updateChildren(chatRoom);
-                //generate a unique key for a message
-                DatabaseReference message_root = chatRef.child(key);
-                Map<String,Object> MessageMap = new HashMap<String,Object>();
-                //update messageMap
-                if(myRole.equals("Trainer")){MessageMap.put("Name",Trainer);}
-                else{MessageMap.put("Name",Trainee);}
-                MessageMap.put("msg",txt.getText().toString());
-
-                View view = ChatActivity.this.getCurrentFocus();
-
-                txt.setText("");//clear text box
-                if (view != null) {//collapse keyboard after sending message
-                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                }
-                //Update FireBase data base
-                message_root.updateChildren(MessageMap);
+        send.setOnClickListener(v -> {
+            if(txt.getText().toString().equals("")){//don't send empty messages
+                return;
             }
+
+            Map<String,Object> chatRoom1 = new HashMap<String,Object>();
+
+            key = chatRef.push().getKey();
+            chatRef.updateChildren(chatRoom1);
+            //generate a unique key for a message
+            DatabaseReference message_root = chatRef.child(key);
+            Map<String,Object> MessageMap = new HashMap<String,Object>();
+            //update messageMap
+            if(myRole.equals("Trainer")){MessageMap.put("Name",Trainer);}
+            else{MessageMap.put("Name",Trainee);}
+            MessageMap.put("msg",txt.getText().toString());
+
+            View view = ChatActivity.this.getCurrentFocus();
+
+            txt.setText("");//clear text box
+            if (view != null) {//collapse keyboard after sending message
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+            //Update FireBase data base
+            message_root.updateChildren(MessageMap);
         });
         //set up message displaying listeners
         chatRef.addChildEventListener(new ChildEventListener() {

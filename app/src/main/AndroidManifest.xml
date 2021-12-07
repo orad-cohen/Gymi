@@ -8,17 +8,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/lastrydumbell"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Gymi"
-        android:usesCleartextTraffic="true">
-        <activity
-            android:name=".chooseTrainerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".addMealActivity"
-            android:exported="false" />
-        <activity
-            android:name=".trainee_home"
-            android:exported="false" />
+        android:theme="@style/Theme.Gymi">
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -28,9 +18,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".TrainerHomeActivity" />
-        <activity android:name=".mealsActivity" />
-    </application>
+        <activity android:name=".SignUpActivity"></activity>
+        <activity android:name=".TraineeHomeActivity"></activity>
+        <activity android:name=".TrainerHome"></activity>
+        <activity android:name=".ReportsActivity"></activity>
+        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".WorkoutReport"></activity>
+        <activity android:name=".FindTrainerActivity"></activity>
+        <activity android:name=".Workout"></activity>
+        <activity android:name=".NewWorkout"></activity>
 
+
+
+    </application>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 </manifest>

@@ -1,64 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="40dp"
+   >
 
-    <LinearLayout
+
+    <TableRow
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="300dp"
+        android:layout_weight="1"
+        >
+
 
         <Button
-            android:id="@+id/button11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/chooseWorkout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="What's my Name"
-            android:onClick="getName"/>
+            android:onClick="chooseWorkout"
+            android:text="Choose workout"
+            app:strokeColor="#008EFF"
+            app:strokeWidth="1dp" />
 
-    </LinearLayout>
-
-    <LinearLayout
+        <Button
+            android:id="@+id/workoutReports"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="workoutReports"
+            android:text="Previous workouts"
+            app:strokeColor="#008EFF"
+            app:strokeWidth="1dp" />
+    </TableRow>
+    <TableRow
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="300dp"
+        android:layout_weight="1"
+        >
+
+        <Button
+            android:id="@+id/chatTrainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="chatTrainer"
+            android:text="Chat Trainer"
+            app:strokeColor="#008EFF"
+            app:strokeWidth="1dp" />
+
+        <Button
+            android:id="@+id/newTrainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="newTrainer"
+            android:text="New Trainer"
+            app:strokeColor="#008EFF"
+            app:strokeWidth="1dp" />
+</TableRow>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_weight="1"
+        >
 
         <Button
             android:id="@+id/bt1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:onClick="getRole"
             android:text="What's my Role?"
-            android:onClick="getRole"/>
+            app:strokeColor="#008EFF"
+            app:strokeWidth="1dp" />
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/button11"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="getName"
+            android:text="What's my Name"
+            app:strokeColor="#008EFF"
+            app:strokeWidth="1dp" />
+    </TableRow>
 
-    <Button
-        android:id="@+id/newTrainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="New Trainer"
-        android:onClick="newTrainer"/>
 
-    <Button
-        android:id="@+id/chatTrainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Chat with my Trainer"
-        android:onClick="chatTrainer"/>
-
-    <Button
-        android:id="@+id/startWorkout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Start workout"
-        android:onClick="startWorkout"/>
-
-    <Button
-        android:id="@+id/workoutReports"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Previous workouts"
-        android:onClick="workoutReports"/>
-</LinearLayout>
+</TableLayout>

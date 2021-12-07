@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/orange"
+        android:text="build your workout, choose your execises: "
+        android:textColor="@color/lightBlue"
+        android:textSize="20dp"
+        android:textStyle="bold|italic" />
+
+    <ImageButton
+        android:id="@+id/abs_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView"
+        app:srcCompat="@drawable/abs" />
+
+    <ImageButton
+        android:id="@+id/backhand_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/abs_btn"
+        app:srcCompat="@drawable/back_hand" />
+
+    <ImageButton
+        android:id="@+id/chest_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/backhand_btn"
+        app:srcCompat="@drawable/chest" />
+
+    <ImageButton
+        android:id="@+id/hand_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chest_btn"
+        app:srcCompat="@drawable/hand" />
+
+    <TextView
+        android:id="@+id/abs_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView"
+        android:layout_toRightOf="@id/abs_btn"
+        android:textSize="30dp"
+        android:text="ABS" />
+
+    <EditText
+        android:id="@+id/abs_sets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/abs_textView"
+        android:layout_toRightOf="@id/abs_btn"
+        android:hint="sets:"
+        android:ems="10"
+        android:inputType="number" />
+    <EditText
+        android:id="@+id/abs_returns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/abs_sets"
+        android:layout_toRightOf="@id/abs_btn"
+        android:hint="returns"
+        android:ems="10"
+        android:inputType="number" />
+    <TextView
+        android:id="@+id/backhand_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/abs_btn"
+        android:layout_toRightOf="@id/abs_btn"
+        android:textSize="30dp"
+        android:text="B.HAND" />
+    <EditText
+        android:id="@+id/backhand_sets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/backhand_textView"
+        android:layout_toRightOf="@id/abs_btn"
+        android:hint="sets:"
+        android:ems="10"
+        android:inputType="number" />
+    <EditText
+        android:id="@+id/backhand_returns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/backhand_sets"
+        android:layout_toRightOf="@id/abs_btn"
+        android:hint="returns"
+        android:ems="10"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/chest_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/backhand_btn"
+        android:layout_toRightOf="@id/abs_btn"
+        android:textSize="30dp"
+        android:text="CHEST" />
+    <EditText
+        android:id="@+id/chest_sets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chest_textView"
+        android:layout_toRightOf="@id/abs_btn"
+        android:hint="sets:"
+        android:ems="10"
+        android:inputType="number" />
+    <EditText
+        android:id="@+id/chest_returns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chest_sets"
+        android:layout_toRightOf="@id/abs_btn"
+        android:hint="returns"
+        android:ems="10"
+        android:inputType="number" />
+    <TextView
+        android:id="@+id/hand_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chest_btn"
+        android:layout_toRightOf="@id/abs_btn"
+        android:textSize="30dp"
+        android:text="HAND" />
+    <EditText
+        android:id="@+id/hand_sets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hand_textView"
+        android:layout_toRightOf="@id/abs_btn"
+        android:hint="sets:"
+        android:ems="10"
+        android:inputType="number" />
+    <EditText
+        android:id="@+id/hand_returns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hand_sets"
+        android:layout_toRightOf="@id/abs_btn"
+        android:hint="returns"
+        android:ems="10"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/send_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BUILED ALL"
+        android:textColor="@color/green"
+        android:layout_below="@id/hand_btn"
+        android:layout_centerHorizontal="true"
+        />
+
+
+</RelativeLayout>
