@@ -16,12 +16,12 @@
 
 
         <Button
-            android:id="@+id/startWorkout"
+            android:id="@+id/chooseWorkout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:onClick="startWorkout"
-            android:text="Start workout"
+            android:onClick="chooseWorkout"
+            android:text="Choose workout"
             app:strokeColor="#008EFF"
             app:strokeWidth="1dp" />
 

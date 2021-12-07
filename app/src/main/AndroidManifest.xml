@@ -25,6 +25,8 @@
         <activity android:name=".ChatActivity"></activity>
         <activity android:name=".WorkoutReport"></activity>
         <activity android:name=".FindTrainerActivity"></activity>
+        <activity android:name=".Workout"></activity>
+
 
     </application>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

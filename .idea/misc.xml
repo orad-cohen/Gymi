@@ -7,11 +7,22 @@
         <entry key="..\:/Users/orad3/AndroidStudioProjects/Gymi/app/src/main/res/layout/login_layout.xml" value="0.152" />
         <entry key="..\:/Users/orad3/AndroidStudioProjects/Gymi/app/src/main/res/layout/signup_activity.xml" value="0.234375" />
         <entry key="..\:/Users/orad3/AndroidStudioProjects/Gymi/app/src/main/res/layout/trainee_home.xml" value="0.25" />
+        <entry key="..\:/Users/tehil/AndroidStudioProjects/Gymi/app/src/main/res/layout/activity_listview.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/tehil/AndroidStudioProjects/Gymi/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/tehil/AndroidStudioProjects/Gymi/app/src/main/res/layout/activity_main1.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/tehil/AndroidStudioProjects/Gymi/app/src/main/res/layout/chat_layout.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/tehil/AndroidStudioProjects/Gymi/app/src/main/res/layout/create_workout.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/tehil/AndroidStudioProjects/Gymi/app/src/main/res/layout/customlist.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/tehil/AndroidStudioProjects/Gymi/app/src/main/res/layout/exercise_list.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/tehil/AndroidStudioProjects/Gymi/app/src/main/res/layout/exercises_list.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/tehil/AndroidStudioProjects/Gymi/app/src/main/res/layout/exercises_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/tehil/AndroidStudioProjects/Gymi/app/src/main/res/layout/exercises_view.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/tehil/AndroidStudioProjects/Gymi/app/src/main/res/layout/list_item.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/tehil/AndroidStudioProjects/Gymi/app/src/main/res/layout/login_layout.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/tehil/AndroidStudioProjects/Gymi/app/src/main/res/layout/new_workout.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/tehil/AndroidStudioProjects/Gymi/app/src/main/res/layout/signup_activity.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/tehil/AndroidStudioProjects/Gymi/app/src/main/res/layout/trainee_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/tehil/AndroidStudioProjects/Gymi/app/src/main/res/layout/trainee_choose_workout.xml" value="0.264" />
+        <entry key="..\:/Users/tehil/AndroidStudioProjects/Gymi/app/src/main/res/layout/trainee_home.xml" value="0.1" />
       </map>
     </option>
   </component>
