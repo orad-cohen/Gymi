@@ -18,6 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".mealsActivity"></activity>
+        <activity android:name=".TrainerHomeActivity"></activity>
         <activity android:name=".SignUpActivity"></activity>
         <activity android:name=".TraineeHomeActivity"></activity>
         <activity android:name=".TrainerHome"></activity>

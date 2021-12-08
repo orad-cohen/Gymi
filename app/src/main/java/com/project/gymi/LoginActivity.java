@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity{
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 if(snapshot.getValue(String.class).equals("Trainer")){
-                    Intent intent = new Intent(LoginActivity.this,ChatActivity.class);
+                    Intent intent = new Intent(LoginActivity.this,TrainerHomeActivity.class);
 
                     //todo once the database structure for Trainer Trainee connection is ready update it accordingly
                     intent.putExtra("Trainer",user.getUid());

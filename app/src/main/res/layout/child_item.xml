@@ -16,7 +16,6 @@
         android:id="@+id/delete"
         android:layout_width="38dp"
         android:layout_height="35dp"
-        android:background="@drawable/delete"
         android:contentDescription="@string/app_name" />
 
 </LinearLayout>
