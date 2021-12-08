@@ -32,10 +32,10 @@ public class TrainerHomeActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.trainer_home);
 
-         TextView tvName = (TextView) findViewById(R.id.tvName);
-         TextView tvRole = (TextView) findViewById(R.id.tvRole);
-         Button btnMeals= (Button) findViewById(R.id.btnMeals);
-         btnMeals.setText("Meals");
+        TextView tvName = (TextView) findViewById(R.id.tvName);
+        TextView tvRole = (TextView) findViewById(R.id.tvRole);
+        Button btnMeals= (Button) findViewById(R.id.btnMeals);
+        btnMeals.setText("Meals");
 
         String uid=FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();
