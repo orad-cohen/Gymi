@@ -14,25 +14,28 @@
         android:textSize="20dp"
         android:textStyle="bold|italic" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/abs_link"
         android:layout_width="67dp"
         android:layout_height="76dp"
         android:layout_below="@id/textView"
         app:srcCompat="@drawable/link" />
-    <ImageView
+
+    <ImageButton
         android:id="@+id/bhand_link"
         android:layout_width="67dp"
         android:layout_height="76dp"
         android:layout_below="@id/abs_link"
         app:srcCompat="@drawable/link" />
-    <ImageView
+
+    <ImageButton
         android:id="@+id/chest_link"
         android:layout_width="67dp"
         android:layout_height="76dp"
         android:layout_below="@id/bhand_link"
         app:srcCompat="@drawable/link" />
-    <ImageView
+
+    <ImageButton
         android:id="@+id/hand_link"
         android:layout_width="67dp"
         android:layout_height="76dp"
@@ -107,13 +110,14 @@
         android:ems="3"
 
         android:inputType="number" />
+
     <EditText
         android:id="@+id/num_of_sets_bhand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/bhand_textView"
-        android:layout_below="@id/num_of_sets_abs"
         android:layout_above="@id/chest_textView"
+        android:layout_below="@id/num_of_sets_abs"
+        android:layout_toRightOf="@id/bhand_textView"
         android:ems="3"
         android:inputType="number" />
     <TextView
@@ -130,18 +134,19 @@
         android:id="@+id/num_of_returns_bhand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/xx"
-        android:layout_below="@id/num_of_sets_abs"
         android:layout_above="@id/chest_textView"
+        android:layout_below="@id/num_of_sets_abs"
+        android:layout_toRightOf="@id/xx"
         android:ems="3"
         android:inputType="number" />
+
     <EditText
         android:id="@+id/num_of_sets_chest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/chest_textView"
-        android:layout_below="@id/num_of_sets_bhand"
         android:layout_above="@id/hand_textView"
+        android:layout_below="@id/num_of_sets_bhand"
+        android:layout_toRightOf="@id/chest_textView"
         android:ems="3"
         android:inputType="number" />
     <TextView
@@ -158,18 +163,19 @@
         android:id="@+id/num_of_returns_chest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/xxx"
-        android:layout_below="@id/num_of_sets_bhand"
         android:layout_above="@id/hand_textView"
+        android:layout_below="@id/num_of_sets_bhand"
+        android:layout_toRightOf="@id/xxx"
         android:ems="3"
         android:inputType="number" />
+
     <EditText
         android:id="@+id/num_of_sets_hand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/hand_textView"
-        android:layout_below="@id/num_of_sets_chest"
         android:layout_above="@id/textView1"
+        android:layout_below="@id/num_of_sets_chest"
+        android:layout_toRightOf="@id/hand_textView"
         android:ems="3"
         android:inputType="number" />
     <TextView
@@ -181,13 +187,14 @@
         android:layout_above="@id/textView1"
         android:textSize="25dp"
         android:text="X" />
+
     <EditText
         android:id="@+id/num_of_returns_hand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/xxxx"
-        android:layout_below="@id/num_of_sets_chest"
         android:layout_above="@id/textView1"
+        android:layout_below="@id/num_of_sets_chest"
+        android:layout_toRightOf="@id/xxxx"
         android:ems="3"
         android:inputType="number" />
 
@@ -210,12 +217,13 @@
         android:text="I ate according to the menu today" />
 
     <Button
-        android:id="@+id/send_btn"
+        android:id="@+id/send_report_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/checkBox"
         android:layout_centerHorizontal="true"
-        android:text="SEND REPORT"
+        android:onClick="getMsg"
+        android:text="FINISH MY WORKOUT"
         android:textColor="@color/green" />
 
 </RelativeLayout>
