@@ -13,13 +13,7 @@
         android:layout_centerHorizontal="true"
         android:text="create new workout" />
 
-    <Button
-        android:id="@+id/upload_workout"
-        android:layout_width="134dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/my_workout"
-        android:layout_centerInParent="true"
-        android:text="upload workout" />
+
 
     <Button
         android:id="@+id/my_workout"

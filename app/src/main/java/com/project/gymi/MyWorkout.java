@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,13 +26,16 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class MyWorkout extends AppCompatActivity {
-
+    //variables
     TextView abs_sets, abs_returns, backhand_sets,
             backhand_returns, chest_sets,chest_returns,hand_sets,hand_returns;
     Button send_report_btn;
 
     ImageButton abs_btn,bhand_btn,chest_btn,hand_btn;
 
+
+
+    //_____________when this activity create by the TRAINER the textview's should be updated automatically from firebase___________//
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +56,29 @@ public class MyWorkout extends AppCompatActivity {
         chest_btn = findViewById(R.id.chest_link);
         hand_btn = findViewById(R.id.hand_link);
 
+        Bundle extras = getIntent().getExtras();
 
+            String absS = extras.getString("absS");
+            String absR = extras.getString("absR");
+            String backhandS = extras.getString("backhandS");
+            String backhandR = extras.getString("backhandR");
+            String chestS = extras.getString("chestS");
+            String chestR = extras.getString("chestR");
+            String handS = extras.getString("handS");
+            String handR = extras.getString("handR");
+
+        abs_sets.setText(absS);
+        abs_returns.setText(absR);
+        backhand_sets.setText(backhandS);
+        backhand_returns.setText(backhandR);
+        chest_sets.setText(chestS);
+        chest_returns.setText(chestR);
+        hand_sets.setText(handS);
+        hand_returns.setText(handR);
+
+
+
+        //YOUTUBE references for our exercises
         abs_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,7 +121,7 @@ public class MyWorkout extends AppCompatActivity {
         goToUrl ("https://www.youtube.com/watch?v=rj0eWvZ4Deo&ab_channel=VShred");
     }
 
-
+    //helpful function for open browser activities
     private void goToUrl(String url) {
         Uri uriUrl = Uri.parse(url);
         Intent launchBrowser = new Intent(Intent.ACTION_VIEW,uriUrl);

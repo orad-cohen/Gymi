@@ -77,7 +77,8 @@ public class NewWorkout extends AppCompatActivity {
                 WorkoutHelperClass helperClass = new WorkoutHelperClass(abs_set,abs_return,backhand_set,backhand_return,chest_set,chest_return, hand_set,hand_return);
                reference.child(mAuth.getCurrentUser().getUid()).setValue(helperClass);
 
-               myWorkout();
+               // while we send firebase the info, we pass to the next activity the values for better UX
+               myWorkout(abs_set,abs_return,backhand_set,backhand_return,chest_set,chest_return,hand_set,hand_return);
             }
         });
 
@@ -86,8 +87,17 @@ public class NewWorkout extends AppCompatActivity {
 
     }
 
-    private void myWorkout() {
+    private void myWorkout(String abs_set,String abs_return,String backhand_set,String backhand_return,String chest_set,String chest_return,String hand_set,String hand_return) {
         Intent intent = new Intent(this, MyWorkout.class);
+        intent.putExtra("absS",abs_set);
+        intent.putExtra("absR",abs_return);
+        intent.putExtra("backhandS",backhand_set);
+        intent.putExtra("backhandR",backhand_return);
+        intent.putExtra("chestS",chest_set);
+        intent.putExtra("chestR",chest_return);
+        intent.putExtra("handS",hand_set);
+        intent.putExtra("handR",hand_return);
+
         startActivity(intent);
     }
 
