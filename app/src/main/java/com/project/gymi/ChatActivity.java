@@ -43,11 +43,10 @@ public class ChatActivity extends AppCompatActivity {
         private ScrollView scrollWindow;
         private Button send,sendRequest,acceptRequest;
         private EditText txt;
-        private String Trainer,Trainee;
+        private String Trainer,Trainee,myRole,key;
         private FirebaseDatabase chatData = FirebaseDatabase.getInstance();
         private DatabaseReference chatRef,pairRef,reqRef;
-        private String myRole;
-        private String key;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -193,7 +192,7 @@ public class ChatActivity extends AppCompatActivity {
                 while (i.hasNext()){
                     LinearLayout da = new LinearLayout(getApplicationContext());
                     da.setOrientation(LinearLayout.HORIZONTAL);
-
+                    da.addView(new TextView(getApplicationContext()));
                     TextView messageContent = new TextView(getApplicationContext());
                     TextView name = new TextView(getApplicationContext());
 
