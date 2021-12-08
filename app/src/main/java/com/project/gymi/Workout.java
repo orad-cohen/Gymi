@@ -21,6 +21,7 @@ public class Workout extends AppCompatActivity {
         new_workout_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 new_workout();
             }
         });

@@ -1,5 +1,6 @@
 package com.project.gymi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,7 +26,6 @@ public class NewWorkout extends AppCompatActivity {
     DatabaseReference reference;
     FirebaseAuth mAuth;
 
-    String user_id = "!";  // need it for firebase
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,10 +66,19 @@ public class NewWorkout extends AppCompatActivity {
 
                 WorkoutHelperClass helperClass = new WorkoutHelperClass(abs_set,abs_return,backhand_set,backhand_return,chest_set,chest_return, hand_set,hand_return);
                reference.child(mAuth.getCurrentUser().getUid()).setValue(helperClass);
+
+               myWorkout();
             }
         });
 
 
 
     }
+
+    private void myWorkout() {
+        Intent intent = new Intent(this, MyWorkout.class);
+        startActivity(intent);
+    }
+
+
 }

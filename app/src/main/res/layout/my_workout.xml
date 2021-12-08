@@ -15,10 +15,207 @@
         android:textStyle="bold|italic" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/abs_link"
+        android:layout_width="67dp"
+        android:layout_height="76dp"
+        android:layout_below="@id/textView"
+        app:srcCompat="@drawable/link" />
+    <ImageView
+        android:id="@+id/bhand_link"
+        android:layout_width="67dp"
+        android:layout_height="76dp"
+        android:layout_below="@id/abs_link"
+        app:srcCompat="@drawable/link" />
+    <ImageView
+        android:id="@+id/chest_link"
+        android:layout_width="67dp"
+        android:layout_height="76dp"
+        android:layout_below="@id/bhand_link"
+        app:srcCompat="@drawable/link" />
+    <ImageView
+        android:id="@+id/hand_link"
+        android:layout_width="67dp"
+        android:layout_height="76dp"
+        android:layout_below="@id/chest_link"
+        app:srcCompat="@drawable/link" />
+    <TextView
+        android:id="@+id/abs_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
+        android:layout_below="@id/textView"
+        android:layout_toRightOf="@id/abs_link"
+        android:textSize="58dp"
+        android:text="abs:" />
 
+    <TextView
+        android:id="@+id/bhand_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/abs_link"
+        android:layout_toRightOf="@id/bhand_link"
+        android:text="b.hand:"
+        android:textSize="58dp" />
+
+    <TextView
+        android:id="@+id/chest_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bhand_link"
+        android:layout_toRightOf="@id/bhand_link"
+        android:text="chest:"
+        android:textSize="58dp" />
+    <TextView
+        android:id="@+id/hand_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chest_link"
+        android:layout_toRightOf="@id/bhand_link"
+        android:textSize="58dp"
+        android:text="hand" />
+
+    <EditText
+        android:id="@+id/num_of_sets_abs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bhand_textView"
+        android:layout_below="@id/textView"
+        android:layout_marginLeft="-2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="-2dp"
+        android:layout_toRightOf="@id/abs_textView"
+        android:ems="3"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/x"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView"
+        android:layout_toRightOf="@id/num_of_sets_abs"
+        android:layout_above="@id/bhand_textView"
+
+        android:textSize="25dp"
+        android:text="X" />
+
+    <EditText
+        android:id="@+id/num_of_returns_abs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bhand_textView"
+        android:layout_below="@id/textView"
+        android:layout_toRightOf="@id/x"
+        android:ems="3"
+
+        android:inputType="number" />
+    <EditText
+        android:id="@+id/num_of_sets_bhand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/bhand_textView"
+        android:layout_below="@id/num_of_sets_abs"
+        android:layout_above="@id/chest_textView"
+        android:ems="3"
+        android:inputType="number" />
+    <TextView
+        android:id="@+id/xx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/abs_textView"
+        android:layout_toRightOf="@id/num_of_sets_bhand"
+        android:layout_above="@id/chest_textView"
+        android:textSize="25dp"
+        android:text="X" />
+
+    <EditText
+        android:id="@+id/num_of_returns_bhand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/xx"
+        android:layout_below="@id/num_of_sets_abs"
+        android:layout_above="@id/chest_textView"
+        android:ems="3"
+        android:inputType="number" />
+    <EditText
+        android:id="@+id/num_of_sets_chest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/chest_textView"
+        android:layout_below="@id/num_of_sets_bhand"
+        android:layout_above="@id/hand_textView"
+        android:ems="3"
+        android:inputType="number" />
+    <TextView
+        android:id="@+id/xxx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bhand_textView"
+        android:layout_toRightOf="@id/num_of_sets_chest"
+        android:layout_above="@id/hand_textView"
+        android:textSize="25dp"
+        android:text="X" />
+
+    <EditText
+        android:id="@+id/num_of_returns_chest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/xxx"
+        android:layout_below="@id/num_of_sets_bhand"
+        android:layout_above="@id/hand_textView"
+        android:ems="3"
+        android:inputType="number" />
+    <EditText
+        android:id="@+id/num_of_sets_hand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/hand_textView"
+        android:layout_below="@id/num_of_sets_chest"
+        android:layout_above="@id/textView1"
+        android:ems="3"
+        android:inputType="number" />
+    <TextView
+        android:id="@+id/xxxx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chest_textView"
+        android:layout_toRightOf="@id/num_of_sets_hand"
+        android:layout_above="@id/textView1"
+        android:textSize="25dp"
+        android:text="X" />
+    <EditText
+        android:id="@+id/num_of_returns_hand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/xxxx"
+        android:layout_below="@id/num_of_sets_chest"
+        android:layout_above="@id/textView1"
+        android:ems="3"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/orange"
+        android:text="My menu: "
+        android:textColor="@color/lightBlue"
+        android:textSize="20dp"
+        android:layout_below="@id/hand_link"
+        android:textStyle="bold|italic" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView1"
+        android:text="I ate according to the menu today" />
+
+    <Button
+        android:id="@+id/send_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkBox"
+        android:layout_centerHorizontal="true"
+        android:text="SEND REPORT"
+        android:textColor="@color/green" />
 
 </RelativeLayout>
