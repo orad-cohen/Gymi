@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Iterator;
+
 public class TrainerHomeActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -32,20 +36,40 @@ public class TrainerHomeActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.trainer_home);
 
-        TextView tvName = (TextView) findViewById(R.id.tvName);
-        TextView tvRole = (TextView) findViewById(R.id.tvRole);
+
         Button btnMeals= (Button) findViewById(R.id.btnMeals);
         requests = findViewById(R.id.requests);
         btnMeals.setText("Meals");
 
         String uid=FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("users").child(uid).addValueEventListener(new ValueEventListener() {
+        LinearLayout trainee= findViewById(R.id.traineeList);
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user = snapshot.getValue(User.class);
-                tvName.setText("Hello "+user.username+"!");
-                tvRole.setText("You Are A "+user.role+".");
+                Iterator i = snapshot.child("Trainers").child(mAuth.getCurrentUser().getUid()).getChildren().iterator();
+                while(i.hasNext()){
+                    String uid = ((DataSnapshot)i.next()).getKey();
+                    String name =snapshot.child("users").child(uid).child("Name").getValue(String.class);
+                    TextView req = new TextView(getApplicationContext());
+                    req.setText(name);
+                    req.setTextSize(24);
+                    req.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(TrainerHomeActivity.this,ChatActivity.class);
+                            intent.putExtra("Trainer",mAuth.getUid());
+                            intent.putExtra("Trainee",uid);
+                            intent.putExtra("Role","Trainer");
+                            startActivity(intent);
+                        }
+                    });
+
+                    trainee.addView(req);
+
+
+                }
             }
 
             @Override
@@ -68,6 +92,8 @@ public class TrainerHomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
 
 
     }
