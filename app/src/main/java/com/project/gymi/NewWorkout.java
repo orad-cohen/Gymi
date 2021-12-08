@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -22,12 +23,15 @@ public class NewWorkout extends AppCompatActivity {
     //firebase
     FirebaseDatabase rootNode;
     DatabaseReference reference;
+    FirebaseAuth mAuth;
+
     String user_id = "!";  // need it for firebase
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.builed_new_workout);
+        mAuth = FirebaseAuth.getInstance();
         abs_sets = findViewById(R.id.abs_sets);
         abs_returns = findViewById(R.id.abs_returns);
         backhand_sets =  findViewById(R.id.backhand_sets);
@@ -61,7 +65,7 @@ public class NewWorkout extends AppCompatActivity {
                 String hand_return = hand_returns.getText().toString();
 
                 WorkoutHelperClass helperClass = new WorkoutHelperClass(abs_set,abs_return,backhand_set,backhand_return,chest_set,chest_return, hand_set,hand_return);
-               reference.setValue(helperClass);
+               reference.child(mAuth.getCurrentUser().getUid()).setValue(helperClass);
             }
         });
 
