@@ -41,11 +41,11 @@ import java.util.Map;
 
 public class ChatActivity extends AppCompatActivity {
         private ScrollView scrollWindow;
-        private Button send,sendRequest;
+        private Button send,sendRequest,acceptRequest;
         private EditText txt;
         private String Trainer,Trainee;
         private FirebaseDatabase chatData = FirebaseDatabase.getInstance();
-        private DatabaseReference chatRef,pairRef;
+        private DatabaseReference chatRef,pairRef,reqRef;
         private String myRole;
         private String key;
 
@@ -57,10 +57,12 @@ public class ChatActivity extends AppCompatActivity {
         sendRequest = new Button(getApplicationContext());
         sendRequest.setText("Send the trainer a request");
         pairRef = chatData.getReference().child("Trainers");
+        acceptRequest = new Button(getApplicationContext());
+        acceptRequest.setText("Accept Request");
 
         scrollWindow = findViewById(R.id.window);
         LinearLayout chatLayout = findViewById(R.id.chatLayout);
-
+        reqRef=chatData.getReference().child("Requests");
         send = findViewById(R.id.send);
         txt = findViewById(R.id.txtsend);
         Trainee = getIntent().getExtras().get("Trainee").toString();
@@ -73,11 +75,48 @@ public class ChatActivity extends AppCompatActivity {
                     if(!snapshot.exists()){
                         sendRequest.setBackgroundColor(getResources().getColor(R.color.dark_orange));
                         chatLayout.addView(sendRequest);
+                        sendRequest.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                DatabaseReference request = chatData.getReference();
+                                request.child("Requests").child(Trainer).child(Trainee).setValue("1");
+                            }
+                        });
                     }
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {}});
+
+        }
+        else{
+
+            reqRef.child(Trainer).child(Trainee).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()){
+
+
+                        acceptRequest.setBackgroundColor(getResources().getColor(R.color.dark_orange));
+                        chatLayout.addView(acceptRequest);
+                        acceptRequest.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                DatabaseReference request = chatData.getReference();
+                                request.child("Trainers").child(Trainer).child(Trainee).setValue("1");
+                                reqRef.child(Trainer).child(Trainee).getRef().removeValue();
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
 
         }
 

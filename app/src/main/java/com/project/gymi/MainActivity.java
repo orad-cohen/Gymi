@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
                 if(user.role.equals("Trainee")){
-                    Intent intent = new Intent(getApplicationContext(), trainee_home.class);
+                    Intent intent = new Intent(getApplicationContext(), TraineeHomeActivity.class);
                     startActivity(intent);
                 }
 

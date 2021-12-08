@@ -30,7 +30,6 @@ public class TraineeHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.trainee_home);
-        //##############################################//
 
         button = findViewById(R.id.chooseWorkout);
         button.setOnClickListener(new View.OnClickListener(){
@@ -64,7 +63,7 @@ public class TraineeHomeActivity extends AppCompatActivity {
     }
 
     public void newTrainer(View view) {
-        Intent intent = new Intent(this,FindTrainerActivity.class);
+        Intent intent = new Intent(this,chooseTrainerActivity.class);
 
         startActivity(intent);
     }

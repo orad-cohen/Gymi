@@ -72,7 +72,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 mDatabase.child("users").child(user.getUid()).child("Role").setValue(role);
                                 User.getInstance();
                                 if(User.getInstance().role=="Trainer"){
-                                    Intent intent = new Intent(SignUpActivity.this,TrainerHome.class);
+                                    Intent intent = new Intent(SignUpActivity.this,TrainerHomeActivity.class);
                                     startActivity(intent);
                                 }
                                 else{

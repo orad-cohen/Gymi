@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 public class TrainerHomeActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
-
+    private Button requests;
 
 
     @Override
@@ -35,6 +35,7 @@ public class TrainerHomeActivity extends AppCompatActivity {
         TextView tvName = (TextView) findViewById(R.id.tvName);
         TextView tvRole = (TextView) findViewById(R.id.tvRole);
         Button btnMeals= (Button) findViewById(R.id.btnMeals);
+        requests = findViewById(R.id.requests);
         btnMeals.setText("Meals");
 
         String uid=FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -60,6 +61,14 @@ public class TrainerHomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        requests.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TrainerHomeActivity.this, RequestActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 }
