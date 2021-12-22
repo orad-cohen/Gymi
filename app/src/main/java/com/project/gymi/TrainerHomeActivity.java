@@ -35,14 +35,21 @@ public class TrainerHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.trainer_home);
+        Button btnWorkouts = findViewById(R.id.Workouts);
+        btnWorkouts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),ReportsActivity.class);
+                startActivity(intent);
+            }
+        });
 
-
-        Button btnMeals= (Button) findViewById(R.id.btnMeals);
+        Button btnMeals= (Button) findViewById(R.id.btnMeals);//מוציא מצביע למיקום בזיכרון של הכפתור שנמצא ב - layout
         requests = findViewById(R.id.requests);
         btnMeals.setText("Meals");
 
-        String uid=FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();
+        String uid=FirebaseAuth.getInstance().getCurrentUser().getUid();//מזהה הייחודי של המשתמש שמחובר
+        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();//מצביע על השורש של הדאטאבייס
         LinearLayout trainee= findViewById(R.id.traineeList);
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -51,7 +58,7 @@ public class TrainerHomeActivity extends AppCompatActivity {
                 Iterator i = snapshot.child("Trainers").child(mAuth.getCurrentUser().getUid()).getChildren().iterator();
                 while(i.hasNext()){
                     String uid = ((DataSnapshot)i.next()).getKey();
-                    String name =snapshot.child("users").child(uid).child("Name").getValue(String.class);
+                    String name =snapshot.child("users").child(uid).child("Name").getValue(String.class);//מביא את השם של המתאמן
                     TextView req = new TextView(getApplicationContext());
                     req.setText(name);
                     req.setTextSize(24);

@@ -30,23 +30,23 @@ import java.util.List;
 public class chooseTrainerActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choose_trainer);
-        mAuth = FirebaseAuth.getInstance(); //connected to database
-        HashMap<String,String> NametoUID=new HashMap<>();
+                    protected void onCreate(Bundle savedInstanceState) {
+                        super.onCreate(savedInstanceState);
+                        setContentView(R.layout.activity_choose_trainer);
+                        mAuth = FirebaseAuth.getInstance(); //connected to database
+                        HashMap<String,String> NametoUID=new HashMap<>();
 
-        ListView lvTrainerList = findViewById(R.id.lstTrainersView);
-        TextView helloMessage = findViewById(R.id.tvWelcomeMessage);
+                        ListView lvTrainerList = findViewById(R.id.lstTrainersView);
+                        TextView helloMessage = findViewById(R.id.tvWelcomeMessage);
 
-        helloMessage.setText("Hello: "+User.getInstance().username+"\nPlease Choose a Trainer:");
-        ArrayList<String> userName= new ArrayList<>();
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("users").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    HashMap<String,String> userNode= (HashMap<String, String>) postSnapshot.getValue();
+                        helloMessage.setText("Hello: "+User.getInstance().username+"\nPlease Choose a Trainer:");
+                        ArrayList<String> userName= new ArrayList<>();
+                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+                        databaseReference.child("users").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                                    HashMap<String,String> userNode= (HashMap<String, String>) postSnapshot.getValue();
                     String trainerUID= postSnapshot.getKey();
                     if(userNode.get("Role").equals("Trainer") && !(userName.contains(userNode.get("Name")))){
                         userName.add(userNode.get("Name"));
@@ -54,7 +54,7 @@ public class chooseTrainerActivity extends AppCompatActivity {
                     }
                 }
                 //Collections.sort(userName);
-                ArrayAdapter<String> itemsAdapter =new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, userName);
+                ArrayAdapter<String> itemsAdapter =new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, userName);//כל מאמן יקבל שורה בפני עצמו ברשימה
                 lvTrainerList.setAdapter(itemsAdapter);
 
                 lvTrainerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -66,11 +66,11 @@ public class chooseTrainerActivity extends AppCompatActivity {
                         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int id) {
-                                Intent intent = new Intent(getApplicationContext(),ChatActivity.class);
+                                Intent intent = new Intent(getApplicationContext(),ChatActivity.class);//מועבר לצ'אט
                                 intent.putExtra("Trainee", mAuth.getUid());
                                 intent.putExtra("Role","Trainee");
                                 intent.putExtra("Trainer",NametoUID.get(userName.get(i)));
-                                startActivity(intent);
+                                startActivity(intent);//עוברים למסך הבא ומה שרואים זה בעצם את השמות של המאמן והמתאמן ב - צ'אט
                             }
                         });
                         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {

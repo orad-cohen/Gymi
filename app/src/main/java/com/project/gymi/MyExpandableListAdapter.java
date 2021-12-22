@@ -16,9 +16,9 @@ import java.util.Map;
 
 public class MyExpandableListAdapter extends BaseExpandableListAdapter {
 
-    private Context context;
-    private Map<String, List<String>> mobileCollection;
-    private List<String> groupList;
+    private Context context;//הקשר
+    private Map<String, List<String>> mobileCollection;//מאכל ומה שהוא מכיל בתוכו
+    private List<String> groupList;//כל המאכלים
 
     public MyExpandableListAdapter(Context context, List<String> groupList,
                                    Map<String, List<String>> mobileCollection){
@@ -60,16 +60,16 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public boolean hasStableIds() {
         return true;
-    }
+    }//חייב להיות כי יורש מהמחלקה שעשיתי של האדפטר
 
     @Override
     public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
         String mobileName = getGroup(i).toString();
         if(view == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.group_item, null);
+            view = inflater.inflate(R.layout.group_item, null);//
         }
-        TextView item = view.findViewById(R.id.mealName);
+        TextView item = view.findViewById(R.id.mealName);//תצוגה של שם של המאכל
         item.setTypeface(null, Typeface.BOLD);
         item.setText(mobileName);
         return view;
