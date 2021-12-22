@@ -31,8 +31,16 @@
         <activity android:name=".Workout"></activity>
         <activity android:name=".NewWorkout"></activity>
         <activity android:name=".MyWorkout"></activity>
+        <service
+            android:name=".NotificationService"
+            android:label="@string/app_name"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="your.app.domain.NotificationService" />
 
-
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
 
 
 

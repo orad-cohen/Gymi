@@ -21,6 +21,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -39,6 +40,7 @@ public class LoginActivity extends AppCompatActivity{
     private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
     private DatabaseReference ref = firebaseDatabase.getReference("users/");
     private FirebaseUser user;
+    final Handler handler = new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,61 +105,13 @@ public class LoginActivity extends AppCompatActivity{
 
                 if(snapshot.getValue(String.class).equals("Trainer")){
                     Intent intent = new Intent(LoginActivity.this,TrainerHomeActivity.class);
-                    firebaseDatabase.getReference().child("Requests").child(user.getUid()).addChildEventListener(new ChildEventListener() {
+
+                    handler.post(new Runnable() {
                         @Override
-                        public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                CharSequence name = getString(R.string.app_name);
-                                String description = getString(R.string.channel);
-                                int importance = NotificationManager.IMPORTANCE_DEFAULT;
-                                NotificationChannel channel = new NotificationChannel("testing?", name, importance);
-                                channel.setDescription(description);
-                                // Register the channel with the system; you can't change the importance
-                                // or other notification behaviors after this
-                                NotificationManager notificationManager = getSystemService(NotificationManager.class);
-                                notificationManager.createNotificationChannel(channel);
-                                NotificationCompat.Builder builder = new NotificationCompat.Builder(LoginActivity.this,"testing?");
-                                builder.setSmallIcon(R.drawable.ic_stat_name)
-                                        .setContentTitle("Test")
-                                        .setContentText("This is a Test")
-                                        .setAutoCancel(true);
-                                NotificationManagerCompat nm = NotificationManagerCompat.from(LoginActivity.this);
-                                nm.notify(21323,builder.build());
-                            }
-                            else{
-                                Notification.Builder builder = new Notification.Builder(LoginActivity.this)
-                                        .setSmallIcon(R.drawable.ic_stat_name)
-                                        .setContentTitle("Test")
-                                        .setContentText("This is a Test")
-                                        .setAutoCancel(true);
-
-                                NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                                notificationManager.notify(213121, builder.build());
-                            }
-
-                        }
-
-                        @Override
-                        public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-                        }
-
-                        @Override
-                        public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-                        }
-
-                        @Override
-                        public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
+                        public void run() {
+                            startService(new Intent(LoginActivity.this, NotificationService.class));
                         }
                     });
-
                     startActivity(intent);
                 }
                 else{
