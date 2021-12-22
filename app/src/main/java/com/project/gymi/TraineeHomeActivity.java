@@ -20,6 +20,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 public class TraineeHomeActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -70,10 +74,29 @@ public class TraineeHomeActivity extends AppCompatActivity {
 
     public void chatTrainer(View view) {
         Intent intent = new Intent(this,ChatActivity.class);
-        intent.putExtra("Trainee", mAuth.getUid());
-        intent.putExtra("Role","Trainee");
-        intent.putExtra("Trainer","CkorN6Rq6KZtdiIAhMvoh6DgmPp1");
-        startActivity(intent);
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Trainers");
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Iterator i = snapshot.getChildren().iterator();
+                while(i.hasNext()){
+                    DataSnapshot dNext = (DataSnapshot) i.next();
+                    Map<String,String> Details = (Map<String, String>)(dNext).getValue();
+                    if(Details.containsKey(mAuth.getUid())){
+                        intent.putExtra("Trainee", mAuth.getUid());
+                        intent.putExtra("Role","Trainee");
+                        intent.putExtra("Trainer",dNext.getKey());
+                        startActivity(intent);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     //public void startWorkout(View view) {

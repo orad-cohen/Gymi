@@ -30,6 +30,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
+import java.util.Map;
+
 public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -68,6 +71,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 mDatabase = FirebaseDatabase.getInstance().getReference();
                                 Log.d(TAG, "createUserWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
+
                                 mDatabase.child("users").child(user.getUid()).child("Name").setValue(name);
                                 mDatabase.child("users").child(user.getUid()).child("Role").setValue(role);
                                 User.getInstance();

@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,16 +26,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class chooseTrainerActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     @Override
-                    protected void onCreate(Bundle savedInstanceState) {
-                        super.onCreate(savedInstanceState);
-                        setContentView(R.layout.activity_choose_trainer);
-                        mAuth = FirebaseAuth.getInstance(); //connected to database
-                        HashMap<String,String> NametoUID=new HashMap<>();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_choose_trainer);
+        mAuth = FirebaseAuth.getInstance(); //connected to database
+        HashMap<String,String> NametoUID=new HashMap<>();
 
                         ListView lvTrainerList = findViewById(R.id.lstTrainersView);
                         TextView helloMessage = findViewById(R.id.tvWelcomeMessage);
