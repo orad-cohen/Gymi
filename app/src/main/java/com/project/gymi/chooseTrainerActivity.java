@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class chooseTrainerActivity extends AppCompatActivity {
@@ -46,11 +48,12 @@ public class chooseTrainerActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    HashMap<String,String> userNode= (HashMap<String, String>) postSnapshot.getValue();
+
+                    Map<String,Object> userNode= (Map<String, Object>) postSnapshot.getValue();
                     String trainerUID= postSnapshot.getKey();
                     if(userNode.get("Role").equals("Trainer") && !(userName.contains(userNode.get("Name")))){
-                        userName.add(userNode.get("Name"));
-                        NametoUID.put(userNode.get("Name"),trainerUID);
+                        userName.add((String)userNode.get("Name"));
+                        NametoUID.put((String)userNode.get("Name"),trainerUID);
                     }
                 }
                 //Collections.sort(userName);

@@ -23,7 +23,6 @@ public class User {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 username = snapshot.getValue(String.class);
-                System.out.println("inner "+ username);
             }
 
             @Override
@@ -36,7 +35,7 @@ public class User {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 role = snapshot.getValue(String.class);
-                System.out.println("inner "+ username);
+
             }
 
             @Override

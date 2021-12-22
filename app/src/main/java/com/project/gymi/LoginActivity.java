@@ -3,16 +3,23 @@ package com.project.gymi;
 import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -50,7 +57,6 @@ public class LoginActivity extends AppCompatActivity{
 
     @Override
     protected void onDestroy() {
-        mAuth.signOut();
         super.onDestroy();
     }
 
@@ -97,11 +103,61 @@ public class LoginActivity extends AppCompatActivity{
 
                 if(snapshot.getValue(String.class).equals("Trainer")){
                     Intent intent = new Intent(LoginActivity.this,TrainerHomeActivity.class);
+                    firebaseDatabase.getReference().child("Requests").child(user.getUid()).addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                CharSequence name = getString(R.string.app_name);
+                                String description = getString(R.string.channel);
+                                int importance = NotificationManager.IMPORTANCE_DEFAULT;
+                                NotificationChannel channel = new NotificationChannel("testing?", name, importance);
+                                channel.setDescription(description);
+                                // Register the channel with the system; you can't change the importance
+                                // or other notification behaviors after this
+                                NotificationManager notificationManager = getSystemService(NotificationManager.class);
+                                notificationManager.createNotificationChannel(channel);
+                                NotificationCompat.Builder builder = new NotificationCompat.Builder(LoginActivity.this,"testing?");
+                                builder.setSmallIcon(R.drawable.ic_stat_name)
+                                        .setContentTitle("Test")
+                                        .setContentText("This is a Test")
+                                        .setAutoCancel(true);
+                                NotificationManagerCompat nm = NotificationManagerCompat.from(LoginActivity.this);
+                                nm.notify(21323,builder.build());
+                            }
+                            else{
+                                Notification.Builder builder = new Notification.Builder(LoginActivity.this)
+                                        .setSmallIcon(R.drawable.ic_stat_name)
+                                        .setContentTitle("Test")
+                                        .setContentText("This is a Test")
+                                        .setAutoCancel(true);
 
-                    //todo once the database structure for Trainer Trainee connection is ready update it accordingly
-                    intent.putExtra("Trainer",user.getUid());
-                    intent.putExtra("Trainee","AW88ReWhZEavTl4diQFzympWNEO2");
-                    intent.putExtra("Role","Trainer");
+                                NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                                notificationManager.notify(213121, builder.build());
+                            }
+
+                        }
+
+                        @Override
+                        public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                        }
+
+                        @Override
+                        public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+                        }
+
+                        @Override
+                        public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
                     startActivity(intent);
                 }
                 else{
