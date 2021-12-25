@@ -6,6 +6,30 @@
     android:orientation="vertical"
     android:paddingTop="40dp"
    >
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0">
+        <TextView
+            android:id="@+id/chooseworkouttext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:gravity="center"
+            android:text="Choose Workout"
+            android:textColor="#000000"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/previousworkouttext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:gravity="center"
+            android:text="Previous Workouts"
+            android:textColor="#000000"
+            android:layout_weight="1"/>
+    </TableRow>
+
 
 
     <TableRow
@@ -15,21 +39,23 @@
         >
 
 
-        <Button
+        <ImageView
             android:id="@+id/chooseWorkout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="chooseWorkout"
             android:text="Choose workout"
+            android:src="@mipmap/wokringout"
             app:strokeColor="#008EFF"
             app:strokeWidth="1dp" />
 
-        <Button
+        <ImageView
             android:id="@+id/workoutReports"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:src="@mipmap/clipboardsill"
             android:onClick="workoutReports"
             android:text="Previous workouts"
             app:strokeColor="#008EFF"
@@ -37,56 +63,56 @@
     </TableRow>
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_weight="1"
-        >
-
-        <Button
-            android:id="@+id/chatTrainer"
+        android:layout_height="wrap_content"
+        android:layout_weight="0">
+        <TextView
+            android:id="@+id/chattrainertext"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="chatTrainer"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:gravity="center"
             android:text="Chat Trainer"
-            app:strokeColor="#008EFF"
-            app:strokeWidth="1dp" />
-
-        <Button
-            android:id="@+id/newTrainer"
+            android:textColor="#000000"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/newtrainertext"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="newTrainer"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:gravity="center"
             android:text="New Trainer"
-            app:strokeColor="#008EFF"
-            app:strokeWidth="1dp" />
+            android:textColor="#000000"
+            android:layout_weight="1"/>
 </TableRow>
+
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_weight="1"
         >
 
-        <Button
-            android:id="@+id/bt1"
+        <ImageView
+            android:id="@+id/chatTrainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:onClick="getRole"
-            android:text="What's my Role?"
+            android:onClick="chatTrainer"
+            android:src="@mipmap/speechbubblenobackground"
+            android:text="Chat Trainer"
+            app:strokeColor="#008EFF"
+            app:strokeWidth="1dp" />
+        <ImageView
+            android:id="@+id/newTrainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="newTrainer"
+            android:src="@mipmap/musclenobackground"
             app:strokeColor="#008EFF"
             app:strokeWidth="1dp" />
 
-        <Button
-            android:id="@+id/button11"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="getName"
-            android:text="What's my Name"
-            app:strokeColor="#008EFF"
-            app:strokeWidth="1dp" />
-    </TableRow>
+</TableRow>
+
 
 
 </TableLayout>
