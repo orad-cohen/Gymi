@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.project.gymi.util;
 import androidx.annotation.NonNull;
@@ -27,7 +29,7 @@ import java.util.Map;
 public class TraineeHomeActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
-    private Button button;
+    private ImageView button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,21 +52,6 @@ public class TraineeHomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-
-
-
-
-    public void getName(View view) {
-        Toast.makeText(this, "Your name is "+ User.getInstance().username, Toast.LENGTH_SHORT).show();
-
-
-
-    }
-
-    public void getRole(View view) {
-        Toast.makeText(this, "Your role is "+ User.getInstance().role, Toast.LENGTH_SHORT).show();
-    }
 
     public void newTrainer(View view) {
         Intent intent = new Intent(this,chooseTrainerActivity.class);
