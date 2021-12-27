@@ -226,4 +226,11 @@
         android:text="FINISH MY WORKOUT"
         android:textColor="@color/green" />
 
+    <ImageButton
+        android:id="@+id/openCamButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkBox"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
+
 </RelativeLayout>

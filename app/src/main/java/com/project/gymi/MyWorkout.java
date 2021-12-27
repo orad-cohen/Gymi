@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -31,7 +32,7 @@ public class MyWorkout extends AppCompatActivity {
             backhand_returns, chest_sets,chest_returns,hand_sets,hand_returns;
     Button send_report_btn;
 
-    ImageButton abs_btn,bhand_btn,chest_btn,hand_btn;
+    ImageButton abs_btn,bhand_btn,chest_btn,hand_btn,cam_btn;
 
 
 
@@ -55,7 +56,7 @@ public class MyWorkout extends AppCompatActivity {
         bhand_btn = findViewById(R.id.bhand_link);
         chest_btn = findViewById(R.id.chest_link);
         hand_btn = findViewById(R.id.hand_link);
-
+        cam_btn = findViewById(R.id.openCamButton);
         Bundle extras = getIntent().getExtras();
 
             String absS = extras.getString("absS");
@@ -106,6 +107,7 @@ public class MyWorkout extends AppCompatActivity {
 
 
 
+
     }
 
 
@@ -114,6 +116,7 @@ public class MyWorkout extends AppCompatActivity {
     public void getMsg(View view) {
         Toast.makeText(this, "well done! your trainer will get the data and contact you soon", Toast.LENGTH_SHORT).show();
     }
+
     public void goToAbs(){
         goToUrl ("https://www.youtube.com/watch?v=vkKCVCZe474");
     }
