@@ -9,7 +9,25 @@
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0">
+        android:layout_weight="0"
+        >
+        <TextView
+            android:id="@+id/Hello"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:gravity="center"
+            android:text="Loading..."
+            android:textColor="#000000"
+            android:layout_weight="1"
+            android:textSize="22dp"></TextView>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        >
         <TextView
             android:id="@+id/chooseworkouttext"
             android:layout_width="match_parent"
@@ -18,7 +36,8 @@
             android:gravity="center"
             android:text="Choose Workout"
             android:textColor="#000000"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textSize="22dp"/>
         <TextView
             android:id="@+id/previousworkouttext"
             android:layout_width="match_parent"
@@ -27,28 +46,30 @@
             android:gravity="center"
             android:text="Previous Workouts"
             android:textColor="#000000"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textSize="22dp"/>
     </TableRow>
 
 
 
     <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         >
 
 
         <ImageView
             android:id="@+id/chooseWorkout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="chooseWorkout"
             android:text="Choose workout"
             android:src="@mipmap/wokringout"
             app:strokeColor="#008EFF"
-            app:strokeWidth="1dp" />
+            app:strokeWidth="1dp"
+            />
 
         <ImageView
             android:id="@+id/workoutReports"
@@ -73,7 +94,8 @@
             android:gravity="center"
             android:text="Chat Trainer"
             android:textColor="#000000"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textSize="22dp"/>
         <TextView
             android:id="@+id/newtrainertext"
             android:layout_width="match_parent"
@@ -82,12 +104,13 @@
             android:gravity="center"
             android:text="New Trainer"
             android:textColor="#000000"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textSize="22dp"/>
 </TableRow>
 
     <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         >
 
@@ -100,7 +123,7 @@
             android:src="@mipmap/speechbubblenobackground"
             android:text="Chat Trainer"
             app:strokeColor="#008EFF"
-            app:strokeWidth="1dp" />
+             />
         <ImageView
             android:id="@+id/newTrainer"
             android:layout_width="match_parent"

@@ -33,6 +33,7 @@ public class TrainerHomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        startService(new Intent(this,NotificationService.class));
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.trainer_home);
         Button btnWorkouts = findViewById(R.id.Workouts);

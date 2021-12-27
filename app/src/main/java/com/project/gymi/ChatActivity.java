@@ -53,12 +53,8 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //attach views to variables
         setContentView(R.layout.chat_layout);
-        sendRequest = new Button(getApplicationContext());
-        sendRequest.setText("Send the trainer a request");
-        pairRef = chatData.getReference().child("Trainers");
-        acceptRequest = new Button(getApplicationContext());
-        acceptRequest.setText("Accept Request");
 
+        pairRef = chatData.getReference().child("Trainers");
         scrollWindow = findViewById(R.id.window);
         LinearLayout chatLayout = findViewById(R.id.chatLayout);
         reqRef=chatData.getReference().child("Requests");
@@ -72,6 +68,8 @@ public class ChatActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(!snapshot.exists()){
+                        sendRequest = new Button(getApplicationContext());
+                        sendRequest.setText("Send the trainer a request");
                         sendRequest.setBackgroundColor(getResources().getColor(R.color.dark_orange));
                         chatLayout.addView(sendRequest);
                         sendRequest.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +77,8 @@ public class ChatActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 DatabaseReference request = chatData.getReference();
                                 request.child("Requests").child(Trainer).child(Trainee).setValue("1");
+                                chatLayout.removeView(sendRequest);
+                                Toast.makeText(ChatActivity.this,"Request sent",Toast.LENGTH_SHORT);
                             }
                         });
                     }
@@ -89,13 +89,12 @@ public class ChatActivity extends AppCompatActivity {
 
         }
         else{
-
             reqRef.child(Trainer).child(Trainee).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()){
-
-
+                        acceptRequest = new Button(getApplicationContext());
+                        acceptRequest.setText("Accept Request");
                         acceptRequest.setBackgroundColor(getResources().getColor(R.color.dark_orange));
                         chatLayout.addView(acceptRequest);
                         acceptRequest.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +103,8 @@ public class ChatActivity extends AppCompatActivity {
                                 DatabaseReference request = chatData.getReference();
                                 request.child("Trainers").child(Trainer).child(Trainee).setValue("1");
                                 reqRef.child(Trainer).child(Trainee).getRef().removeValue();
+                                chatLayout.removeView(acceptRequest);
+                                Toast.makeText(ChatActivity.this,"Request accepted",Toast.LENGTH_SHORT);
                             }
                         });
                     }
@@ -114,20 +115,7 @@ public class ChatActivity extends AppCompatActivity {
 
                 }
             });
-
-
-
         }
-
-        sendRequest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth auth = FirebaseAuth.getInstance();
-                FirebaseUser user = auth.getCurrentUser();
-                pairRef.child("CkorN6Rq6KZtdiIAhMvoh6DgmPp1").child(user.getUid()).setValue("1");
-                Toast.makeText(ChatActivity.this, "request sent", Toast.LENGTH_SHORT).show();
-            }
-        });
         //use Trainer Trainee to set up a chatroom
         String chatRoom = Trainer+" "+Trainee;
         chatRef = chatData.getReference().child("chat").child(chatRoom).getRef();
@@ -138,7 +126,6 @@ public class ChatActivity extends AppCompatActivity {
             }
 
             Map<String,Object> chatRoom1 = new HashMap<String,Object>();
-
             key = chatRef.push().getKey();
             chatRef.updateChildren(chatRoom1);
             //generate a unique key for a message
@@ -190,11 +177,11 @@ public class ChatActivity extends AppCompatActivity {
                 Iterator i = dataSnapshot.getChildren().iterator();
 
                 while (i.hasNext()){
-                    LinearLayout da = new LinearLayout(getApplicationContext());
-                    da.setOrientation(LinearLayout.HORIZONTAL);
-                    da.addView(new TextView(getApplicationContext()));
+                    LinearLayout messageDisplay = new LinearLayout(getApplicationContext());
+                    messageDisplay.setOrientation(LinearLayout.HORIZONTAL);
+
                     TextView messageContent = new TextView(getApplicationContext());
-                    TextView name = new TextView(getApplicationContext());
+                    TextView nameDisplay = new TextView(getApplicationContext());
 
                     chat_user_id = (String) ((DataSnapshot)i.next()).getValue();
                     chat_msg= (String) ((DataSnapshot)i.next()).getValue();
@@ -204,16 +191,16 @@ public class ChatActivity extends AppCompatActivity {
 
                     messageContent.setTextSize(24);
                     //Bitmap resizedBitmap;
-                    name.setText(chat_user_name);
+                    nameDisplay.setText(chat_user_name);
                     if(myRole.equals(msg_role)){
 
-                        da.setGravity(Gravity.RIGHT);
-                        name.setGravity(Gravity.RIGHT);
+                        messageDisplay.setGravity(Gravity.RIGHT);
+                        nameDisplay.setGravity(Gravity.RIGHT);
                         messageContent.setGravity(Gravity.RIGHT);
                         messageContent.setText(chat_msg);
                         messageContent.setPadding(0,0,25,0);
-                        name.setPadding(0,0,10,0);
-                        //messageContent.setBackground(getDrawable(R.color.purple_200));
+                        nameDisplay.setPadding(0,0,10,0);
+
 
                         //code for using vector as message background.
                         /*
@@ -229,13 +216,13 @@ public class ChatActivity extends AppCompatActivity {
 
                     }
                     else{
-                        da.setGravity(Gravity.LEFT);
-                        name.setGravity(Gravity.LEFT);
+                        messageDisplay.setGravity(Gravity.LEFT);
+                        nameDisplay.setGravity(Gravity.LEFT);
                         messageContent.setGravity(Gravity.LEFT);
                         messageContent.setText(chat_msg);
-                        name.setPadding(10,0,0,0);
+                        nameDisplay.setPadding(10,0,0,0);
                         messageContent.setPadding(25,0,0,0);
-                        //messageContent.setBackground(getDrawable(R.color.lightBlue));
+
 
                         //code for using vector as message background.
                         /*
@@ -249,16 +236,16 @@ public class ChatActivity extends AppCompatActivity {
                         resizedBitmap = Bitmap.createBitmap(bk, 0, 0, bk.getWidth(), bk.getHeight(), matrix, false);*/
 
                     }
+                    //add background to view
+                    /*ImageView img = new ImageView(ChatActivity.this);
+                    img.setImageBitmap(resizedBitmap);
+                    messageContent.setBackground(img.getDrawable());*/
 
-                    //ImageView img = new ImageView(ChatActivity.this);
-                    //img.setImageBitmap(resizedBitmap);
-                    //messageContent.setBackground(img.getDrawable());
-
-                    name.setTextSize(24);
-                    name.setTypeface(name.getTypeface(), Typeface.BOLD);
-                    messageWindow.addView(name);
-                    da.addView(messageContent);
-                    messageWindow.addView(da);
+                    nameDisplay.setTextSize(24);
+                    nameDisplay.setTypeface(nameDisplay.getTypeface(), Typeface.BOLD);
+                    messageWindow.addView(nameDisplay);
+                    messageDisplay.addView(messageContent);
+                    messageWindow.addView(messageDisplay);
                     //auto scroll down when messages appear;
                     messageWindow.post(() -> {
                         scrollWindow = findViewById(R.id.window);
@@ -279,21 +266,6 @@ public class ChatActivity extends AppCompatActivity {
 
 
     }
-
-    /*public static Bitmap getBitmapFromVectorDrawable(Context context, int drawableId) {
-        Drawable drawable = ContextCompat.getDrawable(context, drawableId);
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
-            drawable = (DrawableCompat.wrap(drawable)).mutate();
-
-        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
-                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        drawable.draw(canvas);
-
-        return bitmap;
-    }*/
-
 
 
     }

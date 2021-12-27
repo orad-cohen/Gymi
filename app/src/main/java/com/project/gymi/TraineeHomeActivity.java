@@ -36,8 +36,22 @@ public class TraineeHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.trainee_home);
-
         button = findViewById(R.id.chooseWorkout);
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid()).child("Name");
+        TextView hello = findViewById(R.id.Hello);
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String name = snapshot.getValue(String.class);
+                hello.setText("Hello "+name+"! ");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

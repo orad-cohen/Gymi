@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
@@ -47,6 +48,7 @@ public class LoginActivity extends AppCompatActivity{
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         setContentView(R.layout.login_layout);
+        updateLocation();
         /*if(user!=null){
             signIn();
         }
@@ -57,9 +59,26 @@ public class LoginActivity extends AppCompatActivity{
 
     }
 
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        Intent serviceintent = new Intent(LoginActivity.this, NotificationService.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startService(serviceintent);
+            //startForegroundService(serviceintent);
+        }
+        else{
+            startService(serviceintent);
+        }
+
+    }
+    @Override
+    protected void onPause() {
+
+        super.onPause();
+
     }
 
     public void signUp(View view) {
@@ -98,7 +117,7 @@ public class LoginActivity extends AppCompatActivity{
     }
     public void signIn(){
         updateTimestamp();
-        updateLocation();
+
         ref.child(user.getUid()).child("Role").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -106,12 +125,7 @@ public class LoginActivity extends AppCompatActivity{
                 if(snapshot.getValue(String.class).equals("Trainer")){
                     Intent intent = new Intent(LoginActivity.this,TrainerHomeActivity.class);
 
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            startService(new Intent(LoginActivity.this, NotificationService.class));
-                        }
-                    });
+
                     startActivity(intent);
                 }
                 else{
