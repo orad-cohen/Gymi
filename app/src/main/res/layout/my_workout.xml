@@ -233,4 +233,14 @@
         android:layout_below="@id/checkBox"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background"
+        android:layout_below="@id/openCamButton"
+        android:layout_centerHorizontal="true"
+
+        />
+
 </RelativeLayout>

@@ -1,7 +1,10 @@
 package com.project.gymi;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -9,6 +12,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +20,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +39,8 @@ public class MyWorkout extends AppCompatActivity {
     Button send_report_btn;
 
     ImageButton abs_btn,bhand_btn,chest_btn,hand_btn,cam_btn;
+
+    ImageView imageView;
 
 
 
@@ -56,7 +64,10 @@ public class MyWorkout extends AppCompatActivity {
         bhand_btn = findViewById(R.id.bhand_link);
         chest_btn = findViewById(R.id.chest_link);
         hand_btn = findViewById(R.id.hand_link);
+
         cam_btn = findViewById(R.id.openCamButton);
+        imageView = findViewById(R.id.imageView);
+
         Bundle extras = getIntent().getExtras();
 
             String absS = extras.getString("absS");
@@ -76,6 +87,25 @@ public class MyWorkout extends AppCompatActivity {
         chest_returns.setText(chestR);
         hand_sets.setText(handS);
         hand_returns.setText(handR);
+
+        //Request for camera permission
+        if (ContextCompat.checkSelfPermission(MyWorkout.this,
+                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(MyWorkout.this,
+                    new String[]{
+                            Manifest.permission.CAMERA
+                    },
+                    100);
+        }
+
+        cam_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //open camera
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent,100);
+            }
+        });
 
 
 
@@ -110,8 +140,17 @@ public class MyWorkout extends AppCompatActivity {
 
     }
 
-
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        //the line above do not appear in the guide "how to capture image with camera in android studio | 8.11.2019
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100) {
+            //get capture image
+            Bitmap captureImage = (Bitmap) data.getExtras().get("data");
+            //set capture image to imageView
+            imageView.setImageBitmap(captureImage);
+        }
+    }
 
     public void getMsg(View view) {
         Toast.makeText(this, "well done! your trainer will get the data and contact you soon", Toast.LENGTH_SHORT).show();
