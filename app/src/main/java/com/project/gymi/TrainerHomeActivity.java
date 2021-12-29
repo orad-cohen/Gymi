@@ -3,6 +3,7 @@ package com.project.gymi;
 import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -36,14 +37,7 @@ public class TrainerHomeActivity extends AppCompatActivity {
         startService(new Intent(this,NotificationService.class));
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.trainer_home);
-        Button btnWorkouts = findViewById(R.id.Workouts);
-        btnWorkouts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),ReportsActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
         Button btnMeals= (Button) findViewById(R.id.btnMeals);//מוציא מצביע למיקום בזיכרון של הכפתור שנמצא ב - layout
         requests = findViewById(R.id.requests);
@@ -63,7 +57,8 @@ public class TrainerHomeActivity extends AppCompatActivity {
                     TextView req = new TextView(getApplicationContext());
                     req.setText(name);
                     req.setTextSize(24);
-                    req.setOnClickListener(new View.OnClickListener() {
+                    Button bt = new Button(getApplicationContext());
+                    bt.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(TrainerHomeActivity.this,ChatActivity.class);
@@ -73,8 +68,46 @@ public class TrainerHomeActivity extends AppCompatActivity {
                             startActivity(intent);
                         }
                     });
+                    Button bt1 = new Button(getApplicationContext());
+                    bt1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(TrainerHomeActivity.this,WorkoutReport.class);
+                            startActivity(intent);
+                        }
+                    });
+                    Button bt2 = new Button(getApplicationContext());
+                    bt2.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(TrainerHomeActivity.this,NewWorkout.class);
+                            startActivity(intent);
+                        }
+                    });
+                    LinearLayout  ly=new LinearLayout(getApplicationContext());
+                    ly.setOrientation(LinearLayout.HORIZONTAL);
+                    bt.setText("Chat");
+                    int greenColorValue = Color.parseColor("#fccb7c");
+                    bt.setBackgroundColor(greenColorValue);
+                    bt.setTextColor(Color.WHITE);
+                    bt.setTextSize(12);
 
+                    bt1.setText("Previous Workouts");
+                    bt1.setBackgroundColor(greenColorValue);
+                    bt1.setTextColor(Color.WHITE);
+                    bt1.setTextSize(12);
+
+                    bt2.setText("New Workouts");
+                    bt2.setBackgroundColor(greenColorValue);
+                    bt2.setTextColor(Color.WHITE);
+                    bt2.setTextSize(12);
+
+                    ly.addView(bt);
+                    ly.addView(bt1);
+                    ly.addView(bt2);
                     trainee.addView(req);
+                    trainee.addView(ly);
+
 
 
                 }
