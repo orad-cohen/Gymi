@@ -46,16 +46,12 @@ public class LoginActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
-        user = mAuth.getCurrentUser();
+
         setContentView(R.layout.login_layout);
         updateLocation();
-        /*if(user!=null){
-            signIn();
-        }
-        else{
 
-        }*/
-
+        user = mAuth.getCurrentUser();
+        /*if(user!=null){signIn();)*/
 
     }
 

@@ -75,7 +75,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 mDatabase.child("users").child(user.getUid()).child("Name").setValue(name);
                                 mDatabase.child("users").child(user.getUid()).child("Role").setValue(role);
                                 User.getInstance();
-                                if(User.getInstance().role=="Trainer"){
+                                if(role.equals("Trainer")){
                                     Intent intent = new Intent(SignUpActivity.this,TrainerHomeActivity.class);
                                     startActivity(intent);
                                 }
